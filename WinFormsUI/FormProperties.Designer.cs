@@ -123,6 +123,7 @@
             this.textBoxFirstPlayer.Size = new System.Drawing.Size(312, 42);
             this.textBoxFirstPlayer.TabIndex = 2;
             this.textBoxFirstPlayer.Text = "Player1";
+            this.textBoxFirstPlayer.TextChanged += new System.EventHandler(this.textBoxFirstPlayer_TextChanged);
             // 
             // label2
             // 
@@ -147,6 +148,7 @@
             this.textBoxSecondPlayer.Size = new System.Drawing.Size(233, 42);
             this.textBoxSecondPlayer.TabIndex = 2;
             this.textBoxSecondPlayer.Text = "Computer";
+            this.textBoxSecondPlayer.TextChanged += new System.EventHandler(this.textBoxSecondPlayer_TextChanged);
             // 
             // checkBoxWantPlayer2
             // 
@@ -255,6 +257,7 @@
             this.buttonPlay.TabIndex = 6;
             this.buttonPlay.Text = "Play";
             this.buttonPlay.UseVisualStyleBackColor = true;
+            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
             // FormProperties
             // 
