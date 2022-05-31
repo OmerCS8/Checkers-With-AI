@@ -119,6 +119,7 @@
             this.textBoxFirstPlayer.BackColor = System.Drawing.SystemColors.HighlightText;
             this.textBoxFirstPlayer.Font = new System.Drawing.Font("Cooper Black", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxFirstPlayer.Location = new System.Drawing.Point(356, 232);
+            this.textBoxFirstPlayer.MaxLength = 10;
             this.textBoxFirstPlayer.Name = "textBoxFirstPlayer";
             this.textBoxFirstPlayer.Size = new System.Drawing.Size(312, 42);
             this.textBoxFirstPlayer.TabIndex = 2;
@@ -144,6 +145,7 @@
             this.textBoxSecondPlayer.Enabled = false;
             this.textBoxSecondPlayer.Font = new System.Drawing.Font("Cooper Black", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxSecondPlayer.Location = new System.Drawing.Point(435, 285);
+            this.textBoxSecondPlayer.MaxLength = 10;
             this.textBoxSecondPlayer.Name = "textBoxSecondPlayer";
             this.textBoxSecondPlayer.Size = new System.Drawing.Size(233, 42);
             this.textBoxSecondPlayer.TabIndex = 2;

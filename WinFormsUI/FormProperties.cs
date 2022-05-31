@@ -8,23 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
+using SystemEngine;
+using static SystemEngine.ArtificialIntelligence;
+using static SystemEngine.Player;
 
 namespace WinFormsUI
 {
     public partial class FormProperties : Form
     {
-        public enum eDifficulty
-        {
-            Easy,
-            Medium,
-            Hard
-        }
 
         private int m_BoardSize;
-        private bool m_IsHumanRival;
         private string m_FirstPlayerName;
         private string m_SecondPlayerName;
-        private eDifficulty m_Difficulty;
+        private ePlayerType m_RivalType;
+        private eComputerLevel m_Difficulty;
 
         public FormProperties()
         {
@@ -33,9 +30,9 @@ namespace WinFormsUI
             this.textBoxSecondPlayer.Leave += new System.EventHandler(textBoxesPlayers_Leave);
             initializeRadioButtonsListeners();
             m_BoardSize = radioButtonSize6X6.Checked ? 6 : (radioButtonSize8X8.Checked ? 8 : 10);
-            m_Difficulty = radioButtonEasy.Checked ? eDifficulty.Easy
-                               : (radioButtonMedium.Checked ? eDifficulty.Medium : eDifficulty.Hard);
-            m_IsHumanRival = checkBoxWantPlayer2.Checked;
+            m_Difficulty = radioButtonEasy.Checked ? eComputerLevel.Easy
+                               : (radioButtonMedium.Checked ? eComputerLevel.Medium : eComputerLevel.Hard);
+            m_RivalType = checkBoxWantPlayer2.Checked? ePlayerType.Human : ePlayerType.Computer;
             m_FirstPlayerName = textBoxFirstPlayer.Text;
             m_SecondPlayerName = textBoxSecondPlayer.Text;
         }
@@ -57,7 +54,7 @@ namespace WinFormsUI
             radioButtonHard.Enabled = !checkBoxWantPlayer2.Checked;
             textBoxSecondPlayer.Enabled = checkBoxWantPlayer2.Checked;
             textBoxSecondPlayer.Text = "Computer";
-            m_IsHumanRival = checkBoxWantPlayer2.Checked;
+            m_RivalType = checkBoxWantPlayer2.Checked ? ePlayerType.Human : ePlayerType.Computer;
         }
 
         private void textBoxFirstPlayer_TextChanged(object sender, EventArgs e)
@@ -87,7 +84,10 @@ namespace WinFormsUI
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("started");
+            FormCheckersGame checkersForm = new FormCheckersGame(
+                m_BoardSize, m_Difficulty, m_FirstPlayerName, m_SecondPlayerName, m_RivalType);
+            this.Hide();
+            checkersForm.ShowDialog();
         }
 
         private void radioButtonsSize_CheckedChanged(object sender, EventArgs e)
@@ -97,8 +97,8 @@ namespace WinFormsUI
 
         private void radioButtonDifficulty_CheckedChanged(object sender, EventArgs e)
         {
-            m_Difficulty = radioButtonEasy.Checked ? eDifficulty.Easy
-                               : (radioButtonMedium.Checked ? eDifficulty.Medium : eDifficulty.Hard);
+            m_Difficulty = radioButtonEasy.Checked ? eComputerLevel.Easy
+                               : (radioButtonMedium.Checked ? eComputerLevel.Medium : eComputerLevel.Hard);
         }
     }
 }
