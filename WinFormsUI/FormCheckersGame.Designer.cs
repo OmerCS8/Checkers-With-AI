@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCheckersGame));
-            this.panel1 = new System.Windows.Forms.Panel();
             this.PanelScorePlayer2 = new System.Windows.Forms.Panel();
             this.labelScorePlayer2 = new System.Windows.Forms.Label();
             this.labelNamePlayer2 = new System.Windows.Forms.Label();
@@ -37,30 +36,21 @@
             this.labelScorePlayer1 = new System.Windows.Forms.Label();
             this.labelNamePlayer1 = new System.Windows.Forms.Label();
             this.panelBoard = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.PanelScorePlayer2.SuspendLayout();
             this.PanelScorePlayer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.PanelScorePlayer2);
-            this.panel1.Controls.Add(this.PanelScorePlayer1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(532, 90);
-            this.panel1.TabIndex = 0;
             // 
             // PanelScorePlayer2
             // 
+            this.PanelScorePlayer2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.PanelScorePlayer2.BackColor = System.Drawing.Color.Transparent;
             this.PanelScorePlayer2.BackgroundImage = global::WinFormsUI.Properties.Resources.wood_deep;
             this.PanelScorePlayer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PanelScorePlayer2.Controls.Add(this.labelScorePlayer2);
             this.PanelScorePlayer2.Controls.Add(this.labelNamePlayer2);
-            this.PanelScorePlayer2.Location = new System.Drawing.Point(276, 10);
+            this.PanelScorePlayer2.Location = new System.Drawing.Point(277, 10);
             this.PanelScorePlayer2.Margin = new System.Windows.Forms.Padding(0);
             this.PanelScorePlayer2.Name = "PanelScorePlayer2";
             this.PanelScorePlayer2.Size = new System.Drawing.Size(246, 73);
@@ -90,6 +80,7 @@
             // 
             // PanelScorePlayer1
             // 
+            this.PanelScorePlayer1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.PanelScorePlayer1.BackColor = System.Drawing.Color.Transparent;
             this.PanelScorePlayer1.BackgroundImage = global::WinFormsUI.Properties.Resources.wood_deep;
             this.PanelScorePlayer1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -125,14 +116,27 @@
             // 
             // panelBoard
             // 
-            this.panelBoard.BackgroundImage = global::WinFormsUI.Properties.Resources.white_tile;
+            this.panelBoard.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelBoard.BackColor = System.Drawing.Color.BurlyWood;
+            this.panelBoard.BackgroundImage = global::WinFormsUI.Properties.Resources.checkers_board;
             this.panelBoard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelBoard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBoard.Location = new System.Drawing.Point(63, 96);
+            this.panelBoard.Location = new System.Drawing.Point(62, 91);
             this.panelBoard.Name = "panelBoard";
             this.panelBoard.Padding = new System.Windows.Forms.Padding(40);
             this.panelBoard.Size = new System.Drawing.Size(400, 400);
             this.panelBoard.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.PanelScorePlayer2);
+            this.panel1.Controls.Add(this.PanelScorePlayer1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(532, 85);
+            this.panel1.TabIndex = 2;
             // 
             // FormCheckersGame
             // 
@@ -140,24 +144,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WinFormsUI.Properties.Resources.floor;
             this.ClientSize = new System.Drawing.Size(532, 503);
-            this.Controls.Add(this.panelBoard);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelBoard);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCheckersGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCheckersGame";
-            this.panel1.ResumeLayout(false);
             this.PanelScorePlayer2.ResumeLayout(false);
             this.PanelScorePlayer2.PerformLayout();
             this.PanelScorePlayer1.ResumeLayout(false);
             this.PanelScorePlayer1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Panel panel1;
         private Label labelNamePlayer1;
         private Panel PanelScorePlayer2;
         private Panel PanelScorePlayer1;
@@ -165,5 +167,6 @@
         private Label labelScorePlayer2;
         private Label labelNamePlayer2;
         private Panel panelBoard;
+        private Panel panel1;
     }
 }
