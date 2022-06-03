@@ -248,11 +248,10 @@
             // buttonPlay
             // 
             this.buttonPlay.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonPlay.BackgroundImage = global::WinFormsUI.Properties.Resources.black_tile;
+            this.buttonPlay.BackgroundImage = global::WinFormsUI.Properties.Resources.black_tile_small;
             this.buttonPlay.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPlay.Font = new System.Drawing.Font("Cooper Black", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonPlay.ForeColor = System.Drawing.Color.White;
-            this.buttonPlay.Image = global::WinFormsUI.Properties.Resources.black_tile;
             this.buttonPlay.Location = new System.Drawing.Point(475, 399);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(193, 68);
@@ -265,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::WinFormsUI.Properties.Resources.white_tile;
+            this.BackgroundImage = global::WinFormsUI.Properties.Resources.white_wood_background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(737, 500);
             this.Controls.Add(this.buttonPlay);

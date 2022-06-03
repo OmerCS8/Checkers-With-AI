@@ -136,6 +136,18 @@ namespace SystemEngine
             return possibleMoves;
         }
 
+        public List<Cell> GetPossibleMoveCellsOfPlayer()
+        {
+            List<Cell> possibleMoveCells = new List<Cell>();
+
+        foreach (GameMove move in CheckIfHaveEatingMoves()? GetPossibleEatingMoves() : GetPossibleMovesOfPlayer())
+        {
+            possibleMoveCells.Add(move.SourceCell);
+        }
+
+            return possibleMoveCells;
+        }
+
         public List<GameMove> GetPossibleEatingMoves()
         {
             List<GameMove> possibleEatingMoves = new List<GameMove>();
@@ -151,7 +163,7 @@ namespace SystemEngine
             return possibleEatingMoves;
         }
 
-        public bool CheckIfHaveEatingMoves(Board i_Board)
+        public bool CheckIfHaveEatingMoves()
         {
             return GetPossibleEatingMoves().Count > 0;
         }

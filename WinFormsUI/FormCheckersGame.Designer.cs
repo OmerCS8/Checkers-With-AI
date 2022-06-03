@@ -37,9 +37,11 @@
             this.labelNamePlayer1 = new System.Windows.Forms.Label();
             this.panelBoard = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBoxArrowTurn = new System.Windows.Forms.PictureBox();
             this.PanelScorePlayer2.SuspendLayout();
             this.PanelScorePlayer1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowTurn)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelScorePlayer2
@@ -50,10 +52,10 @@
             this.PanelScorePlayer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PanelScorePlayer2.Controls.Add(this.labelScorePlayer2);
             this.PanelScorePlayer2.Controls.Add(this.labelNamePlayer2);
-            this.PanelScorePlayer2.Location = new System.Drawing.Point(277, 10);
+            this.PanelScorePlayer2.Location = new System.Drawing.Point(324, 10);
             this.PanelScorePlayer2.Margin = new System.Windows.Forms.Padding(0);
             this.PanelScorePlayer2.Name = "PanelScorePlayer2";
-            this.PanelScorePlayer2.Size = new System.Drawing.Size(246, 73);
+            this.PanelScorePlayer2.Size = new System.Drawing.Size(199, 73);
             this.PanelScorePlayer2.TabIndex = 2;
             // 
             // labelScorePlayer2
@@ -89,7 +91,7 @@
             this.PanelScorePlayer1.Location = new System.Drawing.Point(10, 10);
             this.PanelScorePlayer1.Margin = new System.Windows.Forms.Padding(0);
             this.PanelScorePlayer1.Name = "PanelScorePlayer1";
-            this.PanelScorePlayer1.Size = new System.Drawing.Size(246, 73);
+            this.PanelScorePlayer1.Size = new System.Drawing.Size(204, 73);
             this.PanelScorePlayer1.TabIndex = 1;
             // 
             // labelScorePlayer1
@@ -121,7 +123,7 @@
             this.panelBoard.BackgroundImage = global::WinFormsUI.Properties.Resources.checkers_board;
             this.panelBoard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelBoard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBoard.Location = new System.Drawing.Point(62, 91);
+            this.panelBoard.Location = new System.Drawing.Point(68, 91);
             this.panelBoard.Name = "panelBoard";
             this.panelBoard.Padding = new System.Windows.Forms.Padding(40);
             this.panelBoard.Size = new System.Drawing.Size(400, 400);
@@ -130,6 +132,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.pictureBoxArrowTurn);
             this.panel1.Controls.Add(this.PanelScorePlayer2);
             this.panel1.Controls.Add(this.PanelScorePlayer1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -137,6 +140,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(532, 85);
             this.panel1.TabIndex = 2;
+            // 
+            // pictureBoxArrowTurn
+            // 
+            this.pictureBoxArrowTurn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBoxArrowTurn.Image = global::WinFormsUI.Properties.Resources.turn_arrow;
+            this.pictureBoxArrowTurn.Location = new System.Drawing.Point(240, 24);
+            this.pictureBoxArrowTurn.Name = "pictureBoxArrowTurn";
+            this.pictureBoxArrowTurn.Size = new System.Drawing.Size(61, 46);
+            this.pictureBoxArrowTurn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxArrowTurn.TabIndex = 3;
+            this.pictureBoxArrowTurn.TabStop = false;
             // 
             // FormCheckersGame
             // 
@@ -155,6 +169,7 @@
             this.PanelScorePlayer1.ResumeLayout(false);
             this.PanelScorePlayer1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArrowTurn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -168,5 +183,6 @@
         private Label labelNamePlayer2;
         private Panel panelBoard;
         private Panel panel1;
+        private PictureBox pictureBoxArrowTurn;
     }
 }

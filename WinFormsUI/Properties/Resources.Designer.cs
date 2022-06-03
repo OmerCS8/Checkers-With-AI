@@ -83,9 +83,9 @@ namespace WinFormsUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap black_pawn {
+        internal static System.Drawing.Bitmap black_pawn_small {
             get {
-                object obj = ResourceManager.GetObject("black-pawn", resourceCulture);
+                object obj = ResourceManager.GetObject("black_pawn_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,19 @@ namespace WinFormsUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap black_tile {
+        internal static System.Drawing.Bitmap black_tile_hilight {
             get {
-                object obj = ResourceManager.GetObject("black-tile", resourceCulture);
+                object obj = ResourceManager.GetObject("black_tile_hilight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap black_tile_small {
+            get {
+                object obj = ResourceManager.GetObject("black_tile_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,16 +116,6 @@ namespace WinFormsUI.Properties {
         internal static System.Drawing.Bitmap board {
             get {
                 object obj = ResourceManager.GetObject("board", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap board1 {
-            get {
-                object obj = ResourceManager.GetObject("board1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,6 +163,16 @@ namespace WinFormsUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap turn_arrow {
+            get {
+                object obj = ResourceManager.GetObject("turn_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap white_king {
             get {
                 object obj = ResourceManager.GetObject("white-king", resourceCulture);
@@ -173,9 +183,9 @@ namespace WinFormsUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap white_pawn {
+        internal static System.Drawing.Bitmap white_pawn_small {
             get {
-                object obj = ResourceManager.GetObject("white-pawn", resourceCulture);
+                object obj = ResourceManager.GetObject("white_pawn_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +193,9 @@ namespace WinFormsUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap white_tile {
+        internal static System.Drawing.Bitmap white_tile_small {
             get {
-                object obj = ResourceManager.GetObject("white-tile", resourceCulture);
+                object obj = ResourceManager.GetObject("white_tile_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +203,9 @@ namespace WinFormsUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap wood {
+        internal static System.Drawing.Bitmap white_wood_background {
             get {
-                object obj = ResourceManager.GetObject("wood", resourceCulture);
+                object obj = ResourceManager.GetObject("white-wood-background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,16 +216,6 @@ namespace WinFormsUI.Properties {
         internal static System.Drawing.Bitmap wood_deep {
             get {
                 object obj = ResourceManager.GetObject("wood_deep", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap wood_round {
-            get {
-                object obj = ResourceManager.GetObject("wood_round", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

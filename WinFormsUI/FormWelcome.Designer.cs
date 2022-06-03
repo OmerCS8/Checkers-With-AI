@@ -43,7 +43,7 @@
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.BackgroundImage = global::WinFormsUI.Properties.Resources.board1;
+            this.panel1.BackgroundImage = global::WinFormsUI.Properties.Resources.board;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonRules);
@@ -59,7 +59,7 @@
             // 
             this.buttonExit.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonExit.BackColor = System.Drawing.Color.LightGray;
-            this.buttonExit.BackgroundImage = global::WinFormsUI.Properties.Resources.white_tile;
+            this.buttonExit.BackgroundImage = global::WinFormsUI.Properties.Resources.white_wood_background;
             this.buttonExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonExit.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonExit.FlatAppearance.BorderSize = 5;
@@ -77,7 +77,7 @@
             // 
             this.buttonRules.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonRules.BackColor = System.Drawing.Color.LightGray;
-            this.buttonRules.BackgroundImage = global::WinFormsUI.Properties.Resources.white_tile;
+            this.buttonRules.BackgroundImage = global::WinFormsUI.Properties.Resources.white_wood_background;
             this.buttonRules.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRules.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonRules.FlatAppearance.BorderSize = 5;
@@ -95,7 +95,7 @@
             // 
             this.buttonStart.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonStart.BackColor = System.Drawing.Color.LightGray;
-            this.buttonStart.BackgroundImage = global::WinFormsUI.Properties.Resources.white_tile;
+            this.buttonStart.BackgroundImage = global::WinFormsUI.Properties.Resources.white_wood_background;
             this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonStart.FlatAppearance.BorderSize = 5;

@@ -29,23 +29,10 @@ namespace WinFormsUI
             }
         }
 
-        internal class CheckersPawm : PictureBox
-        {
-            public int Row { get; set; }
-            public int Column { get; set; }
-
-            public CheckersPawm(int i_Row, int i_Col, int i_CellSize)
-            {
-                Row = i_Row;
-                Column = i_Col;
-                this.Size = new Size((int)(i_CellSize * 0.9), (int)(i_CellSize * 0.9));
-            }
-        }
-
         public FormCheckersGame(int i_BoardSize, eComputerLevel i_Difficulty,
             string i_FirstPlayerName, string i_SecondPlayerName, ePlayerType i_RivalType)
         {
-            int cellSize = i_BoardSize == 6? 100 : i_BoardSize == 8 ? 80 : 70;
+            int cellSize = i_BoardSize == 6 ? 100 : i_BoardSize == 8 ? 80 : 70;
 
             InitializeComponent();
             r_CheckersGame = new Checkers(
@@ -67,6 +54,8 @@ namespace WinFormsUI
 
         private void setBoardAndFitScreenSize(int size, int i_CellSize)
         {
+            Pawn pownOnCell;
+
             panelBoard.Size = new Size(size * i_CellSize + 100, size * i_CellSize + 100);
             this.Size = new Size(panelBoard.Width + 100, panelBoard.Height + 160);
             PanelScorePlayer1.Left = 50;
@@ -74,34 +63,55 @@ namespace WinFormsUI
             this.MinimumSize = this.Size;
             panelBoard.Left = 50;
             panelBoard.Top = PanelScorePlayer1.Top + PanelScorePlayer1.Height + 10;
+            pictureBoxArrowTurn.Left = PanelScorePlayer1.Right + 10;
 
             for (int i = 0; i < size; i++)
             {
-                for(int j = 0; j < size; j++)
+                for (int j = 0; j < size; j++)
                 {
                     CheckersCell checkersCell = new CheckersCell(i, j, i_CellSize);
-                    checkersCell.BackgroundImage = (Math.Abs(i-j))%2 == 0?
-                        Properties.Resources.white_tile: Properties.Resources.black_tile;
-                    checkersCell.Parent = panelBoard;
-                    checkersCell.Location = new Point(j*checkersCell.Width + 50, i*checkersCell.Height + 50);
-                    checkersCell.Show();
-
-                    Pawn pownOnCell = r_CheckersGame.GameBoard.CellArray[i, j].PawnOnCell;
-                    if(pownOnCell != null)
+                    checkersCell.BackgroundImage = (Math.Abs(i - j)) % 2 == 0 ?
+                        Properties.Resources.white_tile_small : Properties.Resources.black_tile_small;
+                    checkersCell.Location = new Point(j * checkersCell.Width + 50, i * checkersCell.Height + 50);
+                    checkersCell.SizeMode = PictureBoxSizeMode.StretchImage;
+                    checkersCell.Padding = new Padding(5, 5, 5, 5);
+                    checkersCell.Click += new EventHandler(cell_Clicked);
+                    checkersCell.MouseEnter += new EventHandler(cell_MouseEnter);
+                    pownOnCell = r_CheckersGame.GameBoard.CellArray[i, j].PawnOnCell;
+                    if (pownOnCell != null)
                     {
-                        CheckersPawm checkersPawm = new CheckersPawm(i, j, i_CellSize);
-                        checkersPawm.BackColor = Color.Transparent;
-                        checkersPawm.Image = pownOnCell.PawnColor == ePlayerColor.Black ?
-                            Properties.Resources.black_pawn : Properties.Resources.white_pawn;
-                        checkersPawm.SizeMode = PictureBoxSizeMode.StretchImage;
-                        checkersPawm.Parent = checkersCell;
-                        checkersPawm.Location = new Point(
-                            (i_CellSize - checkersPawm.Width) / 2, (i_CellSize - checkersPawm.Width) / 2);
-                        checkersPawm.Show();
+                        checkersCell.Image = pownOnCell.PawnColor == ePlayerColor.Black ?
+                            Properties.Resources.black_pawn_small : Properties.Resources.white_pawn_small;
                     }
+                    panelBoard.Controls.Add(checkersCell);
+                    checkersCell.Show();
                 }
             }
+        }
+        private void cell_Clicked(object sender, EventArgs e)
+        {
 
+        }
+        private void cell_MouseEnter(object sender, EventArgs e)
+        {
+            CheckersCell hoveredUICell = (CheckersCell)sender;
+            Cell hoveredCell = r_CheckersGame.GameBoard.CellArray[hoveredUICell.Row, hoveredUICell.Column];
+
+            if (hoveredCell.PawnOnCell != null &&
+                hoveredCell.PawnOnCell.PawnColor == r_CheckersGame.GetPlayerInTurn().PlayerColor &&
+                r_CheckersGame.GetPlayerInTurn().GetPossibleMoveCellsOfPlayer().Contains(hoveredCell))
+            {
+                hoveredUICell.Cursor = Cursors.Hand;
+                hoveredUICell.BackgroundImage = Properties.Resources.black_tile_hilight;
+                hoveredUICell.MouseLeave += new EventHandler(cell_MouseLeave);
+            }
+        }
+
+        private void cell_MouseLeave(object sender, EventArgs e)
+        {
+            ((CheckersCell)sender).Cursor = Cursors.Default;
+            ((CheckersCell)sender).BackgroundImage = Properties.Resources.black_tile_small;
+            ((CheckersCell)sender).MouseLeave -= new EventHandler(cell_MouseLeave);
         }
     }
 }
