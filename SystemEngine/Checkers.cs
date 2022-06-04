@@ -18,6 +18,9 @@ namespace SystemEngine
         private Board m_GameBoard;
         private eGameStatus m_GameStatus;
         private ArtificialIntelligence.eComputerLevel m_Difficulty;
+        public event Action GameEnded;
+        public event Action<GameMove, bool> MoveWasDone;
+        public event Action<Pawn> PawnBecameKing;
 
         public Checkers(string i_FirstPlayerName, string i_SecondPlayerName, Player.ePlayerType i_RivalType,
                         int i_BoardSize, ArtificialIntelligence.eComputerLevel i_Difficulty)
@@ -118,7 +121,12 @@ namespace SystemEngine
                 movingPawn.PawnCurrentCell = i_Move.DestinationCell;
                 i_Move.DestinationCell.PawnOnCell = movingPawn;
                 i_Move.SourceCell.PawnOnCell = null;
-                movingPawn.IsKing = movingPawn.IsKing || m_GameBoard.CheckIfPawnAtKingRow(movingPawn);
+                if(!movingPawn.IsKing && m_GameBoard.CheckIfPawnAtKingRow(movingPawn))
+                {
+                    movingPawn.IsKing = true;
+                    OnPawnBecameKing(movingPawn);
+                }
+
                 if(i_Move.EatenPawn != null)
                 {
                     i_Move.EatenPawn.PawnCurrentCell.PawnOnCell = null;
@@ -138,6 +146,8 @@ namespace SystemEngine
                 {
                     GenerateValidMovesToPawns(movingPawn);
                 }
+
+                OnMoveDone(i_Move, isDoubleMoveNeeded);
             }
             else
             {
@@ -145,6 +155,21 @@ namespace SystemEngine
             }
 
             return isDoubleMoveNeeded;
+        }
+
+        protected virtual void OnMoveDone(GameMove i_Move, bool i_IsDoubleMoveNeeded)
+        {
+            MoveWasDone?.Invoke(i_Move, i_IsDoubleMoveNeeded);
+        }
+
+        protected virtual void OnGameEnded()
+        {
+            GameEnded?.Invoke();
+        }
+
+        protected virtual void OnPawnBecameKing(Pawn i_Pawn)
+        {
+            PawnBecameKing?.Invoke(i_Pawn);
         }
 
         public void UnDoMove(GameMove i_Move, bool i_IsPlayerReplacementNeeded, bool i_IsKingDemotionNeeded)
