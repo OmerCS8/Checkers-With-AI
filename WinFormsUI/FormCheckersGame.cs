@@ -157,7 +157,7 @@ namespace WinFormsUI
 
                 if(r_CheckersGame.GetPlayerInTurn().PlayerType == ePlayerType.Computer)
                 {
-                    r_CheckersGame.DoMoveAndCheckIfDoubleMoveIsNeeded();
+                    TimerToStartComputerMove.Start();
                 }
             }
             else if (chosenCell == m_CurrentMoveSource)
@@ -188,7 +188,7 @@ namespace WinFormsUI
                 }
                 else
                 {
-                    r_CheckersGame.DoMoveAndCheckIfDoubleMoveIsNeeded();
+                    TimerToStartComputerMove.Start();
                 }
             }
             else
@@ -320,6 +320,12 @@ namespace WinFormsUI
             (sender as CellPictureBox).Cursor = Cursors.Default;
             (sender as CellPictureBox).BackgroundImage = Properties.Resources.black_tile_small;
             (sender as CellPictureBox).MouseLeave -= cell_MouseLeave;
+        }
+
+        private void TimerComputerThinking_Tick(object sender, EventArgs e)
+        {
+            TimerToStartComputerMove.Stop();
+            r_CheckersGame.DoMoveAndCheckIfDoubleMoveIsNeeded();
         }
     }
 }

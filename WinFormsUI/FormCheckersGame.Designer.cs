@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCheckersGame));
             this.PanelScorePlayer2 = new System.Windows.Forms.Panel();
             this.labelScorePlayer2 = new System.Windows.Forms.Label();
@@ -38,6 +39,7 @@
             this.panelBoard = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxArrowTurn = new System.Windows.Forms.PictureBox();
+            this.TimerToStartComputerMove = new System.Windows.Forms.Timer(this.components);
             this.PanelScorePlayer2.SuspendLayout();
             this.PanelScorePlayer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -152,6 +154,11 @@
             this.pictureBoxArrowTurn.TabIndex = 3;
             this.pictureBoxArrowTurn.TabStop = false;
             // 
+            // TimerToStartComputerMove
+            // 
+            this.TimerToStartComputerMove.Interval = 1000;
+            this.TimerToStartComputerMove.Tick += new System.EventHandler(this.TimerComputerThinking_Tick);
+            // 
             // FormCheckersGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -184,5 +191,6 @@
         private Panel panelBoard;
         private Panel panel1;
         private PictureBox pictureBoxArrowTurn;
+        private System.Windows.Forms.Timer TimerToStartComputerMove;
     }
 }
