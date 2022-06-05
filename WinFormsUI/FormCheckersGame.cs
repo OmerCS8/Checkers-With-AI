@@ -182,7 +182,14 @@ namespace WinFormsUI
             cancelChosenSourceCell(getCellPictureBox(i_WantedMove.SourceCell));
             if(i_IsDoubleMoveNeeded)
             {
-                chooseSourceCell(i_WantedMove.DestinationCell, getCellPictureBox(i_WantedMove.DestinationCell));
+                if(r_CheckersGame.GetPlayerInTurn().PlayerType == ePlayerType.Human)
+                {
+                    chooseSourceCell(i_WantedMove.DestinationCell, getCellPictureBox(i_WantedMove.DestinationCell));                    
+                }
+                else
+                {
+                    r_CheckersGame.DoMoveAndCheckIfDoubleMoveIsNeeded();
+                }
             }
             else
             {

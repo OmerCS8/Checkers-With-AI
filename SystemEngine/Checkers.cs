@@ -109,10 +109,11 @@ namespace SystemEngine
             }
         }
 
-        public bool DoMoveAndCheckIfDoubleMoveIsNeeded(GameMove i_Move = null)
+        public bool DoMoveAndCheckIfDoubleMoveIsNeeded(GameMove i_Move = null, bool i_IsRealMove = true)
         {
             bool isDoubleMoveNeeded = false;
-
+            bool didBecameKing = false;
+              
             if(i_Move != null)
             {
                 Pawn movingPawn = i_Move.SourceCell.PawnOnCell;
@@ -124,7 +125,7 @@ namespace SystemEngine
                 if(!movingPawn.IsKing && m_GameBoard.CheckIfPawnAtKingRow(movingPawn))
                 {
                     movingPawn.IsKing = true;
-                    OnPawnBecameKing(movingPawn);
+                    didBecameKing = true;
                 }
 
                 if(i_Move.EatenPawn != null)
@@ -147,7 +148,14 @@ namespace SystemEngine
                     GenerateValidMovesToPawns(movingPawn);
                 }
 
-                OnMoveDone(i_Move, isDoubleMoveNeeded);
+                if(i_IsRealMove)
+                { 
+                    OnMoveDone(i_Move, isDoubleMoveNeeded);
+                    if(didBecameKing)
+                    {
+                        OnPawnBecameKing(movingPawn);
+                    }
+                }
             }
             else
             {

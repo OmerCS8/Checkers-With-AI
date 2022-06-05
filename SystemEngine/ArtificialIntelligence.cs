@@ -35,7 +35,6 @@ namespace SystemEngine
             }
 
             GenerateMoveValueAtGivenDepth(i_CheckersGame, isComputerTurn ,numOfStepsAheadThinking, out chosenMove);
-            System.Threading.Thread.Sleep(2000);
 
             return chosenMove;
         }
@@ -63,7 +62,7 @@ namespace SystemEngine
                 foreach (GameMove gameMove in possibleMoves)
                 {
                     isBecomingKing = checkIfMovePawnBecomingKing(gameMove, i_Checkers);
-                    isDoubleMoveNeeded = i_Checkers.DoMoveAndCheckIfDoubleMoveIsNeeded(gameMove);
+                    isDoubleMoveNeeded = i_Checkers.DoMoveAndCheckIfDoubleMoveIsNeeded(gameMove, false);
 
                     if(i_IsComputerTurn)
                     {
