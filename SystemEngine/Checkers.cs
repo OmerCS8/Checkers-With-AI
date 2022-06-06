@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace SystemEngine
@@ -18,7 +19,7 @@ namespace SystemEngine
         private Board m_GameBoard;
         private eGameStatus m_GameStatus;
         private ArtificialIntelligence.eComputerLevel m_Difficulty;
-        public event Action GameEnded;
+        public event Action<Player?, int, int> GameEnded;
         public event Action<GameMove, bool> MoveWasDone;
         public event Action<Pawn> PawnBecameKing;
 
@@ -141,7 +142,6 @@ namespace SystemEngine
                     PlayersArray[0].IsPlayerTurn = !PlayersArray[0].IsPlayerTurn;
                     PlayersArray[1].IsPlayerTurn = !PlayersArray[1].IsPlayerTurn;
                     GenerateValidMovesToPawns();
-                    checkIfGameHasEndedAndUpdateAccordingly();
                 }
                 else
                 {
@@ -155,6 +155,7 @@ namespace SystemEngine
                     {
                         OnPawnBecameKing(movingPawn);
                     }
+                    checkIfGameHasEndedAndUpdateAccordingly();
                 }
             }
             else
@@ -170,9 +171,10 @@ namespace SystemEngine
             MoveWasDone?.Invoke(i_Move, i_IsDoubleMoveNeeded);
         }
 
-        protected virtual void OnGameEnded()
+        protected virtual void OnGameEnded
+            (int i_FirstPlayerScore, int i_SecondPlayerScore, Player? i_Winner = null)
         {
-            GameEnded?.Invoke();
+            GameEnded?.Invoke(i_Winner, i_FirstPlayerScore, i_SecondPlayerScore);
         }
 
         protected virtual void OnPawnBecameKing(Pawn i_Pawn)
@@ -242,16 +244,19 @@ namespace SystemEngine
             if(firstPlayerHaveNoMoves && secondPlayerHaveNoMoves)
             {
                 GameStatus = eGameStatus.EndedWithDraw;
+                OnGameEnded(m_PlayersArray[0].Points, m_PlayersArray[1].Points);
             }
             else if(firstPlayerLose)
             {
                 GameStatus = eGameStatus.EndedWithWin;
                 CalcAndAddPointsToWinner(m_PlayersArray[1],m_PlayersArray[0]);
+                OnGameEnded(m_PlayersArray[0].Points, m_PlayersArray[1].Points, m_PlayersArray[1]);
             }
             else if(secondPlayerLose)
             {
                 GameStatus = eGameStatus.EndedWithWin;
                 CalcAndAddPointsToWinner(m_PlayersArray[0],m_PlayersArray[1]);
+                OnGameEnded(m_PlayersArray[0].Points, m_PlayersArray[1].Points, m_PlayersArray[0]);
             }
         }
 

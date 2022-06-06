@@ -289,9 +289,26 @@ namespace WinFormsUI
             pictureBoxArrowTurn.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
-        private void miniGame_Ended()
+        private void miniGame_Ended(Player? i_Winner, int i_FirstPlayerScore, int i_SecondPlayerScore)
         {
+            StringBuilder winnerMessage = new StringBuilder();
+            string caption = "Game over";
+            DialogResult doesWantAnotherRound;
 
+            labelScorePlayer1.Text = i_FirstPlayerScore.ToString();
+            labelScorePlayer2.Text = i_SecondPlayerScore.ToString();
+            if (i_Winner == null)
+            {
+                winnerMessage.AppendLine("The game has ended with a draw!");
+            }
+            else
+            {
+                winnerMessage.AppendFormat("the game is over, the Winner is {0}!{1}", 
+                    i_Winner.PlayerName, Environment.NewLine);
+            }
+
+            winnerMessage.AppendLine("Another round?");
+            doesWantAnotherRound = MessageBox.Show(winnerMessage.ToString(), caption, MessageBoxButtons.YesNo);
         }
 
         private void cell_MouseEnter(object? sender, EventArgs e)
