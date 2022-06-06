@@ -19,6 +19,7 @@ namespace WinFormsUI
         private Cell? m_CurrentMoveSource = null;
         private readonly List<Cell> r_CurrentValidMovesDestinations = new List<Cell>();
         private readonly List<List<CellPictureBox>> r_UICells = new List<List<CellPictureBox>>();
+        private bool m_didCloseByQuit = true;
         internal class CellPictureBox : PictureBox
         {
             public int Row { get; set; }
@@ -150,7 +151,6 @@ namespace WinFormsUI
 
         private void cell_Clicked(object? sender, EventArgs e)
         {
-            GameMove gameMove;
             CellPictureBox? chosenUICell = sender as CellPictureBox;
             Cell chosenCell = r_CheckersGame.GameBoard.CellArray[chosenUICell.Row, chosenUICell.Column];
 
@@ -316,7 +316,8 @@ namespace WinFormsUI
             doesWantAnotherRound = MessageBox.Show(winnerMessage.ToString(), caption, MessageBoxButtons.YesNo);
             if(doesWantAnotherRound == DialogResult.No)
             {
-                this.Close();
+                m_didCloseByQuit = false;
+                this.Dispose();
             }
             else
             {
@@ -327,6 +328,11 @@ namespace WinFormsUI
         private void reloadNewGame()
         {
             Player playerInTurn = r_CheckersGame.GetPlayerInTurn();
+
+            if(m_CurrentMoveSource != null)
+            {
+                cancelChosenSourceCell(getCellPictureBox(m_CurrentMoveSource));
+            }
 
             r_CheckersGame.ReloadNewGame();
             for (int i = 0; i < r_CheckersGame.GameBoard.NumOfRows; i++)
@@ -378,6 +384,28 @@ namespace WinFormsUI
         {
             TimerToStartComputerMove.Stop();
             r_CheckersGame.DoMoveAndCheckIfDoubleMoveIsNeeded();
+        }
+
+        private void FormCheckersGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string message = $"Are you sure that you want quit {r_CheckersGame.GetPlayerInTurn().PlayerName}?";
+            string caption = "Quit game";
+
+            if(m_didCloseByQuit)
+            {
+                e.Cancel = true;
+                DialogResult doesWantToQuit = MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
+                if(doesWantToQuit == DialogResult.Yes)
+                {
+                    r_CheckersGame.CalcAndAddPointsToWinner(
+                        r_CheckersGame.GetPlayerNotInTurn(),
+                        r_CheckersGame.GetPlayerInTurn());
+                    miniGame_Ended(
+                        r_CheckersGame.GetPlayerNotInTurn(),
+                        r_CheckersGame.PlayersArray[0].Points,
+                        r_CheckersGame.PlayersArray[1].Points);
+                }
+            }
         }
     }
 }

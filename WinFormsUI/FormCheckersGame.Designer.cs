@@ -171,6 +171,7 @@
             this.Name = "FormCheckersGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCheckersGame";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCheckersGame_FormClosing);
             this.PanelScorePlayer2.ResumeLayout(false);
             this.PanelScorePlayer2.PerformLayout();
             this.PanelScorePlayer1.ResumeLayout(false);
