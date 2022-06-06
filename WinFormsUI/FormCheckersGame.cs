@@ -48,11 +48,11 @@ namespace WinFormsUI
         private void setScoreLabels(string i_FirstPlayerName, string i_SecondPlayerName)
         {
             labelNamePlayer1.Text = i_FirstPlayerName + ":";
-            labelScorePlayer1.Left = labelNamePlayer1.Right + 5;
+            labelScorePlayer1.Left = labelNamePlayer1.Right;
             labelNamePlayer2.Text = i_SecondPlayerName + ":";
-            labelScorePlayer2.Left = labelNamePlayer2.Right + 5;
-            int minPanelsWidth = Math.Max(labelNamePlayer1.Width + labelScorePlayer1.Width + 30,
-                labelNamePlayer2.Width + labelScorePlayer2.Width + 35);
+            labelScorePlayer2.Left = labelNamePlayer2.Right;
+            int minPanelsWidth = Math.Max(labelNamePlayer1.Width + labelScorePlayer1.Width + 50,
+                labelNamePlayer2.Width + labelScorePlayer2.Width + 50);
             PanelScorePlayer1.Width = PanelScorePlayer2.Width = Math.Max(minPanelsWidth, 200);
         }
 
@@ -80,8 +80,6 @@ namespace WinFormsUI
 
         private void addNewCellToBoard(int i_Row, int i_Col, int i_CellSize)
         {
-            Pawn? pawnOnCell;
-
             CellPictureBox cellPictureBox = new CellPictureBox(i_Row, i_Col, i_CellSize);
             cellPictureBox.BackgroundImage = (Math.Abs(i_Row - i_Col)) % 2 == 0
                                                ? Properties.Resources.white_tile_small
@@ -91,16 +89,23 @@ namespace WinFormsUI
             cellPictureBox.Padding = new Padding(5, 5, 5, 5);
             cellPictureBox.Click += cell_Clicked;
             cellPictureBox.MouseEnter += cell_MouseEnter;
-            pawnOnCell = r_CheckersGame.GameBoard.CellArray[i_Row, i_Col].PawnOnCell;
-            if(pawnOnCell != null)
-            {
-                cellPictureBox.Image = pawnOnCell.PawnColor == ePlayerColor.Black
-                                         ? Properties.Resources.black_pawn_small
-                                         : Properties.Resources.white_pawn_small;
-            }
+            addPawnToCellIfNeeded(i_Row, i_Col, cellPictureBox);
 
             panelBoard.Controls.Add(cellPictureBox);
             r_UICells[i_Row].Add(cellPictureBox);
+        }
+
+        private void addPawnToCellIfNeeded(int i_Row, int i_Col, CellPictureBox i_CellPictureBox)
+        {
+            Pawn? pawnOnCell;
+
+            pawnOnCell = r_CheckersGame.GameBoard.CellArray[i_Row, i_Col].PawnOnCell;
+            if(pawnOnCell != null)
+            {
+                i_CellPictureBox.Image = pawnOnCell.PawnColor == ePlayerColor.Black
+                                           ? Properties.Resources.black_pawn_small
+                                           : Properties.Resources.white_pawn_small;
+            }
         }
 
         private void fitScreenSizeToBoardSize(int i_Size, int i_CellSize)
@@ -309,6 +314,36 @@ namespace WinFormsUI
 
             winnerMessage.AppendLine("Another round?");
             doesWantAnotherRound = MessageBox.Show(winnerMessage.ToString(), caption, MessageBoxButtons.YesNo);
+            if(doesWantAnotherRound == DialogResult.No)
+            {
+                this.Close();
+            }
+            else
+            {
+                reloadNewGame();
+            }
+        }
+
+        private void reloadNewGame()
+        {
+            Player playerInTurn = r_CheckersGame.GetPlayerInTurn();
+
+            r_CheckersGame.ReloadNewGame();
+            for (int i = 0; i < r_CheckersGame.GameBoard.NumOfRows; i++)
+            {
+                for (int j = 0; j < r_CheckersGame.GameBoard.NumOfCols; j++)
+                {
+                    r_UICells[i][j].Image = null;
+                    addPawnToCellIfNeeded(i, j, r_UICells[i][j]);
+                }
+            }
+
+            m_CurrentMoveSource = null;
+            r_CurrentValidMovesDestinations.Clear();
+            if(r_CheckersGame.GetPlayerInTurn() != playerInTurn)
+            {
+                switchTurn();
+            }
         }
 
         private void cell_MouseEnter(object? sender, EventArgs e)
