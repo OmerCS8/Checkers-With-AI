@@ -19,7 +19,7 @@ namespace SystemEngine
         private Board m_GameBoard;
         private eGameStatus m_GameStatus;
         private ArtificialIntelligence.eComputerLevel m_Difficulty;
-        public event Action<Player?, int, int> GameEnded;
+        public event Action<Player, int, int> GameEnded;
         public event Action<GameMove, bool> MoveWasDone;
         public event Action<Pawn> PawnBecameKing;
 
@@ -168,18 +168,18 @@ namespace SystemEngine
 
         protected virtual void OnMoveDone(GameMove i_Move, bool i_IsDoubleMoveNeeded)
         {
-            MoveWasDone?.Invoke(i_Move, i_IsDoubleMoveNeeded);
+            MoveWasDone.Invoke(i_Move, i_IsDoubleMoveNeeded);
         }
 
         protected virtual void OnGameEnded
-            (int i_FirstPlayerScore, int i_SecondPlayerScore, Player? i_Winner = null)
+            (int i_FirstPlayerScore, int i_SecondPlayerScore, Player i_Winner = null)
         {
-            GameEnded?.Invoke(i_Winner, i_FirstPlayerScore, i_SecondPlayerScore);
+            GameEnded.Invoke(i_Winner, i_FirstPlayerScore, i_SecondPlayerScore);
         }
 
         protected virtual void OnPawnBecameKing(Pawn i_Pawn)
         {
-            PawnBecameKing?.Invoke(i_Pawn);
+            PawnBecameKing.Invoke(i_Pawn);
         }
 
         public void UnDoMove(GameMove i_Move, bool i_IsPlayerReplacementNeeded, bool i_IsKingDemotionNeeded)

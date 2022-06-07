@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Forms;
+
 namespace WinFormsUI
 {
     public partial class FormWelcome : Form

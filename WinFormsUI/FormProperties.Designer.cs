@@ -1,4 +1,6 @@
-﻿namespace WinFormsUI
+﻿using System.Windows.Forms;
+
+namespace WinFormsUI
 {
     partial class FormProperties
     {

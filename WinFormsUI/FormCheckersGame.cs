@@ -16,7 +16,7 @@ namespace WinFormsUI
     public partial class FormCheckersGame : Form
     {
         private readonly Checkers r_CheckersGame;
-        private Cell? m_CurrentMoveSource = null;
+        private Cell m_CurrentMoveSource = null;
         private readonly List<Cell> r_CurrentValidMovesDestinations = new List<Cell>();
         private readonly List<List<CellPictureBox>> r_UICells = new List<List<CellPictureBox>>();
         private bool m_didCloseByQuit = true;
@@ -98,7 +98,7 @@ namespace WinFormsUI
 
         private void addPawnToCellIfNeeded(int i_Row, int i_Col, CellPictureBox i_CellPictureBox)
         {
-            Pawn? pawnOnCell;
+            Pawn pawnOnCell;
 
             pawnOnCell = r_CheckersGame.GameBoard.CellArray[i_Row, i_Col].PawnOnCell;
             if(pawnOnCell != null)
@@ -149,9 +149,9 @@ namespace WinFormsUI
                 65 + i_CellSize * i_BoardSize);
         }
 
-        private void cell_Clicked(object? sender, EventArgs e)
+        private void cell_Clicked(object sender, EventArgs e)
         {
-            CellPictureBox? chosenUICell = sender as CellPictureBox;
+            CellPictureBox chosenUICell = sender as CellPictureBox;
             Cell chosenCell = r_CheckersGame.GameBoard.CellArray[chosenUICell.Row, chosenUICell.Column];
 
             if(r_CurrentValidMovesDestinations.Contains(chosenCell))
@@ -294,7 +294,7 @@ namespace WinFormsUI
             pictureBoxArrowTurn.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
-        private void miniGame_Ended(Player? i_Winner, int i_FirstPlayerScore, int i_SecondPlayerScore)
+        private void miniGame_Ended(Player i_Winner, int i_FirstPlayerScore, int i_SecondPlayerScore)
         {
             StringBuilder winnerMessage = new StringBuilder();
             string caption = "Game over";
@@ -352,9 +352,9 @@ namespace WinFormsUI
             }
         }
 
-        private void cell_MouseEnter(object? sender, EventArgs e)
+        private void cell_MouseEnter(object sender, EventArgs e)
         {
-            CellPictureBox? hoveredUICell = sender as CellPictureBox;
+            CellPictureBox hoveredUICell = sender as CellPictureBox;
             Cell hoveredCell = r_CheckersGame.GameBoard.CellArray[hoveredUICell.Row, hoveredUICell.Column];
 
             if (m_CurrentMoveSource == null && isPossibleSourceCell(hoveredCell))
@@ -373,7 +373,7 @@ namespace WinFormsUI
                    r_CheckersGame.GetPlayerInTurn().GetPossibleMoveCellsOfPlayer().Contains(i_Cell);
         }
 
-        private void cell_MouseLeave(object? sender, EventArgs e)
+        private void cell_MouseLeave(object sender, EventArgs e)
         {
             (sender as CellPictureBox).Cursor = Cursors.Default;
             (sender as CellPictureBox).BackgroundImage = Properties.Resources.black_tile_small;
